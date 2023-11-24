@@ -1,5 +1,5 @@
 
-// Examples from the article "Why Math is Hard in JavaScript: Floating Point Precision in JavaScript" by Patrick Karsh
+// Examples from the article "Math is Hard in JavaScript: Floating Point Precision in JavaScript" by Patrick Karsh
 // https://medium.com/@patrickkarsh/why-math-is-hard-in-javascript-floating-point-precision-in-javascript-41706aa7a89d
 
 // Rounding Errors: The Most Common Culprit
