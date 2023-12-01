@@ -10,13 +10,13 @@ long_array ||= (1..1_000_000).to_a
 value_to_find = 1_000_003
 
 puts long_array.include?(value_to_find)
-puts long_array.bsearch { |x| x <=> value_to_find } != nil
-puts long_array.bsearch_index { |x| x <=> value_to_find } != nil
+puts long_array.bsearch { |x| x >= value_to_find } != nil
+puts long_array.bsearch_index { |x| x >= value_to_find } != nil
 
 Benchmark.benchmark(CAPTION, 7, FORMAT, '>total:', '>avg:') do |x|
   x.report('include?     ') { long_array.include?(value_to_find) }
-  x.report('bsearch      ') { long_array.bsearch { |x| x <=> value_to_find } != nil }
-  x.report('bsearch_index') { long_array.bsearch_index { |x| x <=> value_to_find } != nil }
+  x.report('bsearch      ') { long_array.bsearch { |x| x >= value_to_find } != nil }
+  x.report('bsearch_index') { long_array.bsearch_index { |x| x >= value_to_find } != nil }
 end
 
 ## Array#combination
