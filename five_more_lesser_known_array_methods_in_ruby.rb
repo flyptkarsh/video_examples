@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Array#drop_while
 
 # The Array#drop_while method returns an array containing the elements of the array after the first element that returns false or nil when passed to the given block.

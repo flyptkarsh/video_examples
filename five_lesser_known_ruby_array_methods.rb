@@ -1,28 +1,21 @@
+# frozen_string_literal: true
+
+require 'benchmark'
+
 # Array#bsearch
 # Here's how you can use Array#bsearch in Ruby:
-sorted_array = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-value_to_find = 40
+long_array ||= (1..1_000_000).to_a
 
-found_value = sorted_array.bsearch { |x| value_to_find <=> x }
+value_to_find = 999
 
-if found_value
-  puts "Found value: #{found_value}"
-else
-  puts "Value not found."
-end
+puts long_array.include?(value_to_find)
+puts(long_array.bsearch { |x| x >= value_to_find })
+puts(long_array.bsearch_index { |x| x >= value_to_find })
 
-# The bsearch method returns the first element for which the block returns true.
-
-# If you need the index of the found element, you can use the Array#bsearch_index method instead:
-sorted_array = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21]
-number_to_find = 13
-
-found_index = sorted_array.bsearch_index { |x| x >= number_to_find }
-
-if found_index
-  puts "Number found at index: #{found_index}"
-else
-  puts "Number not found."
+Benchmark.bm do |x|
+  x.report { long_array.include?(value_to_find) }
+  x.report { long_array.bsearch { |x| x >= value_to_find } }
+  x.report { long_array.bsearch_index { |x| x >= value_to_find } }
 end
 
 ## Array#combination
@@ -38,13 +31,12 @@ array.combination(3).to_a
 #     [1, 3, 5], [1, 4, 5], [2, 3, 4], [2, 3, 5],
 #     [2, 4, 5], [3, 4, 5]]
 
-
 # Array#combination is useful when you want to find all possible combinations of elements from an array.
 
 ## Array#cycle
 
 # The Array#cycle method calls the given block for each element of the array, repeating the cycle forever.
-    
+
 # Here's an example:
 
 array = [1, 2, 3]
@@ -55,13 +47,12 @@ array.cycle { |x| puts x }
 array = [1, 2, 3]
 array.cycle(2) { |x| puts x }
 
-
-## Array#differences — Calculating Consecutive Differences 
+## Array#differences — Calculating Consecutive Differences
 
 # The Array#differences method returns an array of consecutive differences between the elements of the array.
 
 # Here's an example:
- 
+
 array = [1, 2, 3, 4, 5]
 array.differences
 
@@ -81,4 +72,3 @@ array.dig(1, 1)
 # => 4
 
 # The dig method is useful when you want to access nested elements of an array.
-
